@@ -7,7 +7,7 @@ ENV TARGETARCH=amd64
 USER root
 
 ADD https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_${TARGETARCH}.zip /terraform_${TF_VERSION}_linux_${TARGETARCH}.zip
-RUN unzip -q /terraform_${TF_VERSION}_linux_${TARGETARCH}.zip -d /usr/local/bin/ && \
+RUN unzip -q /terraform_${TF_VERSION}_linux_${TARGETARCH}.zip -d /usr/local/bin/ -o && \
     rm /terraform_${TF_VERSION}_linux_${TARGETARCH}.zip && \
     chmod +x /usr/local/bin/terraform
 

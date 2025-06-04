@@ -13,7 +13,7 @@ RUN unzip -q /terraform_${TF_VERSION}_linux_${TARGETARCH}.zip -d /usr/local/bin/
     chmod +x /usr/local/bin/terraform
 
 # Install apt packages
-run apt-get -y update; apt-get -y install curl
+RUN apt update -y && apt install -y curl
 
 # Install the 1Password CLI
 RUN curl -sS https://downloads.1password.com/linux/keys/1password.asc | \

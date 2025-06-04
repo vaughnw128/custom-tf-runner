@@ -12,7 +12,10 @@ RUN unzip -q /terraform_${TF_VERSION}_linux_${TARGETARCH}.zip -d /usr/local/bin/
     rm /terraform_${TF_VERSION}_linux_${TARGETARCH}.zip && \
     chmod +x /usr/local/bin/terraform
 
-# Set up 1password keyrings
+# Install apt packages
+run apt-get -y update; apt-get -y install curl
+
+# Install the 1Password CLI
 RUN curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
   gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg && \
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | \
@@ -22,10 +25,8 @@ RUN curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
   tee /etc/debsig/policies/AC2D62742012EA22/1password.pol && \
   mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22 && \
   curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
-  gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
-
-# Install apt packages
-run apt-get -y update; apt-get -y install curl 1password-cli
+  gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg && \
+  apt update && apt install 1password-cli
 
 # Get the op cli version to check installation
 RUN op --version

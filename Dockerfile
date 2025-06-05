@@ -1,6 +1,6 @@
 FROM ghcr.io/flux-iac/tf-runner:v0.16.0-rc.5
 
-ENV TF_VERSION=1.5.7
+ENV TF_VERSION=1.12.1
 ENV TARGETARCH=amd64
 
 # Switch to root to have permissions for operations
